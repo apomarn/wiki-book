@@ -1,0 +1,18 @@
+
+<h1>{{genre}}</h1>
+
+
+{{#if books}}
+{{#each books}}
+<div>
+  <img alt="{{title}}" src="{{image}}">
+<div>
+
+    <h2><a href="/title?title={{title}}">{{title}}</a></h2>
+    <p>Published {{publication_date}} by {{publisher}}</p>
+{{/each}}
+{{else}}
+<h2>Sorry, </h2>
+{{/if}}
+
+

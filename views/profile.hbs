@@ -1,0 +1,18 @@
+<div>
+<h1>WIKI BOOK PROFILE</h1>
+<h2>"{{currentUser.username}}"</h2>
+</div>
+
+
+<h3>Your Comments:</h3>
+
+<div>
+{{#each comments}}
+{{!-- <p>{{title}}</p> --}}
+<p>{{author}}</p>
+<p>{{title}}</p>
+<p>{{text}}</p>
+
+{{/each}}
+</div>
+

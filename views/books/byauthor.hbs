@@ -1,0 +1,34 @@
+
+
+<h1>Books by {{author}}:</h1>
+{{#each book}}
+<div>
+  <img alt="{{title}}" src="{{image}}">
+  <div>
+
+    <h2><a href="/title?title={{title}}">{{title}}</a></h2>
+    <p>Published {{publication_date}} by {{publisher}}</p>
+
+ {{/each}}
+    <h3>Leave a comment about the {{author}}: </h3>
+    <form action="/addCommentAuthor" method="POST">
+      <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
+      <input name="author" value="{{author}} "hidden>
+      <input type="submit">
+    </form>
+
+
+{{#each comments}}
+<h3>username: {{username}}</h3>
+<p>{{text}}</p>
+<a href="/commentAutor/edit?id={{_id}}">Edit</a> <a href="/author/delete?id={{_id}}">Delete</a>
+{{/each}}
+
+
+
+{{!-- 
+   {{#each comments}}
+   <h3>username: {{username}}</h3>
+    <p>{{text}}</p>
+  {{/each}} --}}
+     

@@ -1,0 +1,35 @@
+
+
+<div class="welcome">
+<h1>{{title}}</h1>
+<p>Look through more than 100,000,000 books, find the one you like and leave a comment on your favorite books! </p>
+</div>
+
+<p>START BY SEARCHING FOR A BOOK:</p>
+<div>
+  <div>
+    <h3>TITLE:</h3>
+    <form action="/title" method="GET">
+    <input type="text" name="title" class="search">
+    <input type="submit" value="Search" class="submit">
+    </form>
+  </div>
+  <div>
+    <h3>AUTHOR:</H3>
+    <form action="/author" method="GET">
+    <input type="text" name="author" class="search">
+    <input type="submit" value="Search" class="submit">
+    </form>
+  </div>
+</div>
+<p>ALSO LOOK THROUGH OUR TYPES OF BOOKS AND GENRES TO FIND YOUR PERFECT BOOK</p>
+<div>
+  <div>
+    <a href="/fiction"><img alt= "fiction" src="../images/FICTION.png" width="250" height="250"></a>
+    <p>Fiction books contain a made-up story. A story that did not actually happen in real life. These stories are derived from the imagination and creativity of the authors and are not based on facts.</p>
+  </div>
+  <div>
+    <a href="/non-fiction"><img alt="non-fiction" src="../images/NON-FICTION.png" width="250" height="250"></a>
+    <p>Non-fiction or nonfiction books are factual books. Unlike fiction books, they are based on facts and information that can be verified to be true.</p>
+  </div>
+</div>

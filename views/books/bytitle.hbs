@@ -1,0 +1,35 @@
+<div>
+  <img alt="{{book.title}}" src="{{book.image}}">
+</div>
+<div>
+  <h1>{{book.title}}</h1>
+  <h3>- by {{book.author}}</h3>
+  <p>Published {{book.publication_date}} by {{book.publisher}}</p>
+  <p>Total pages: {{book.pages}}</p>
+</div>
+
+<h3>Description:</h3>
+<p>{{book.description}}</p>
+
+
+<p>Genres:</p>
+{{#each book.genre}}
+<ul>
+  <li>
+    <a href="/genre/{{cleanUp this}}">{{this}}</a>
+  </li>
+</ul>
+{{/each}}
+
+<h3>Leave a comment about {{book.title}}: </h3>
+<form action="/addComment" method="POST">
+  <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
+  <input name="bookId" value="{{book._id}}" hidden>
+  <input type="submit">
+</form>
+
+{{#each comments}}
+<h3>username: {{username}}</h3>
+<p>{{text}}</p>
+<a href="/comment/edit?id={{_id}}">Edit</a> <a href="/title/delete?id={{_id}}">Delete</a>
+{{/each}}

@@ -1,0 +1,21 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+a {
+  color: #00b7ff; }
+
+.nav {
+  background: red;
+  height: 80px; }
+
+.welcome {
+  background-image: url("../images/library.jpg");
+  background-size: cover;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+/*# sourceMappingURL=style.css.map */
