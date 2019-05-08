@@ -1,18 +1,36 @@
 <div>
-<h1>WIKI BOOK PROFILE</h1>
-<h2>"{{currentUser.username}}"</h2>
+  <h1>WIKI BOOK PROFILE</h1>
+  <h2>"{{currentUser.username}}"</h2>
 </div>
 
+
+<img src="{{currentUser.avatar}}" alt="">
+<a href="/pictureProfile/edit?id={{currentUser._id}}">EDIT</a>
 
 <h3>Your Comments:</h3>
 
 <div>
-{{#each comments}}
-{{!-- <p>{{title}}</p> --}}
-<p>{{author}}</p>
-<p>{{title}}</p>
-<p>{{text}}</p>
+  {{#each comments}}
+  <img src="{{user_id.avatar}}" alt="">
+  <p>{{text}}</p>
+  <a href="/commentProfile/edit?id={{_id}}">EDIT</a>
+  <a href="/profile/delete?id={{_id}}">DELETE</a>
+  {{/each}}
 
-{{/each}}
+  <script>
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          const image = document.getElementById('usernamePic');
+          image.setAttribute('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+  </script>
 </div>
-

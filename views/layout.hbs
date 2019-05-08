@@ -16,6 +16,7 @@
   {{#if currentUser}}
   <a href="/profile">{{currentUser.username}}</a>
   <a href="/logout">Logout</a>
+  <img src="{{currentUser.avatar}}" alt="" >
   {{else}}
   <a href="/login">Login</a>
   <a href="/signup">SignUp</a>

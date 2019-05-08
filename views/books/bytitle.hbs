@@ -1,3 +1,4 @@
+{{#if currentUser}}
 <div>
   <img alt="{{book.title}}" src="{{book.image}}">
 </div>
@@ -10,6 +11,7 @@
 
 <h3>Description:</h3>
 <p>{{book.description}}</p>
+
 
 
 <p>Genres:</p>
@@ -29,7 +31,47 @@
 </form>
 
 {{#each comments}}
+<img src="{{user_id.avatar}}" alt="">
 <h3>username: {{username}}</h3>
 <p>{{text}}</p>
 <a href="/comment/edit?id={{_id}}">Edit</a> <a href="/title/delete?id={{_id}}">Delete</a>
 {{/each}}
+
+
+
+
+
+{{else}}
+<div>
+  <img alt="{{book.title}}" src="{{book.image}}">
+</div>
+<div>
+  <h1>{{book.title}}</h1>
+  <h3>- by {{book.author}}</h3>
+  <p>Published {{book.publication_date}} by {{book.publisher}}</p>
+  <p>Total pages: {{book.pages}}</p>
+</div>
+
+<h3>Description:</h3>
+<p>{{book.description}}</p>
+
+<p>Genres:</p>
+{{#each book.genre}}
+<ul>
+  <li>
+    <a href="/genre/{{cleanUp this}}">{{this}}</a>
+  </li>
+</ul>
+{{/each}}
+
+<h3>Sign in to leave your reviews <a href="/login">here!</a></h3>
+
+{{#each comments}}
+<img src="{{currentUser.avatar}}" alt="">
+<h3>username: {{username}}</h3>
+<p>{{text}}</p>
+{{/each}}
+
+
+
+{{/if}}

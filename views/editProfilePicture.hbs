@@ -1,0 +1,14 @@
+{{!-- <form action="/pictureProfile/edit?id={{currentUser._id}}" method="POST">
+  <input type='file' name="picture" onchange="readURL(this);" />
+  <img src="{{user_id.avatar}}" alt="" >
+  <button type="submit">EDIT</button>
+</form> --}}
+
+
+<form action="/pictureProfile/edit?id={{currentUser._id}}" method="post" enctype="multipart/form-data">
+
+
+ <input type="file" name="photo">
+
+ <input type="submit" value="SAVE">
+</form>

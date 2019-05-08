@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  title: { type: String, unique: true, trim: true },
+  title: String,
   book_id: String,
-  user_id: String,
+  user_id: { type: Schema.Types.ObjectId, ref: "User" },
   username: String,
   text: String,
   author: String

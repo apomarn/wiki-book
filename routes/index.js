@@ -3,6 +3,8 @@ const router = express.Router();
 const Book = require("../models/book");
 const Comments = require("../models/comments");
 const User = require("../models/user");
+const uploadCloud = require('../cloudinary');
+
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -31,7 +33,7 @@ router.get("/profile", isLoggedIn, async (req, res, next) => {
   try {
     console.log("try this");
     console.log(req.user);
-    const comments = await Comments.find({ username: req.user.username });
+    const comments = await Comments.find({ username: req.user.username }).populate("user_id");
     const user = await User.find({ username: req.query.username });
 
     console.log(comments);
@@ -45,8 +47,9 @@ router.get("/title", async (req, res, next) => {
   try {
     const books = await Book.find({ $text: { $search: req.query.title } });
     const book = books[0];
-    const comments = await Comments.find({ book_id: book._id });
+    const comments = await Comments.find({ book_id: book._id }).populate("user_id");
 
+    console.log("the comments-------------- ", comments);
     res.render("../views/books/bytitle.hbs", { book, comments });
   } catch (err) {
     console.log("error!!!! --->", err);
@@ -57,9 +60,9 @@ router.get("/author", async (req, res, next) => {
   try {
     const book = await Book.find({ $text: { $search: req.query.author } });
     console.log(book);
-    const comments = await Comments.find({ author: req.query.author.toUpperCase() + " " });
+    const comments = await Comments.find({ author: req.query.author }).populate("user_id");
 
-    res.render("../views/books/byauthor.hbs", { book, comments, author: req.query.author.toUpperCase() });
+    res.render("../views/books/byauthor.hbs", { book, comments, author: req.query.author });
   } catch (error) {
     console.log(error);
   }
@@ -172,6 +175,87 @@ router.post("/comment/edit/:id", (req, res, next) => {
     });
 });
 
+router.get("/commentProfile/edit", (req, res, next) => {
+  Comments.findOne({ _id: req.query.id })
+    .then(comment => {
+      res.render("editProfile", { comment });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+router.post("/commentProfile/edit/:id", async (req, res, next) => {
+  const comment = await Comments.findById(req.params.id);
+  comment.text = req.body.title;
+
+  await comment.save();
+  res.redirect("/profile");
+});
+
+router.get("/pictureProfile/edit", (req,res, next) => {
+  User.findOne({_id: req.query.id})
+    .then( user => {
+      res.render("editProfilePicture", {user});
+    })
+    .catch(error => {
+      console.log(error);
+    });
+})
+
+router.post("/pictureProfile/edit?", uploadCloud.single("photo"),  async (req, res, next) => {
+ console.log(req.body)
+  const picture = await User.findByIdAndUpdate(req.query.id, {
+    avatar: req.file.url
+  });
+  
+
+  res.redirect("/profile");
+});
+
+/////////////////////
+
+router.get("/commentAuthor/edit", (req, res, next) => {
+  Comments.findOne({ _id: req.query.id })
+    .then(comment => {
+      res.render("editAuthor", { comment });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+router.post("/commentAuthor/edit/:id", async (req, res, next) => {
+  const comment = await Comments.findById(req.params.id);
+  comment.text = req.body.title;
+
+  await comment.save();
+
+  res.redirect(`/author?author=${comment.author}`);
+});
+
+// router.post("/commentAuthor/edit/:id", (req, res, next) => {
+// console.log("the req body ============ ", req.body);
+// Comments.findById(req.params.id)
+//   .then(comment => {
+//     comment.text = req.body.title;
+
+//     console.log(comment);
+//     comment
+//       .save()
+//       .then(updatedComment => {
+//         console.log(updatedComment, 425243523452433452);
+//         res.redirect(`/author?author=${comment.author}`);
+//       })
+//       .catch(err => {
+//         next(err);
+//       });
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+// });
+
 router.get("/title/delete", (req, res, next) => {
   console.log(req.query);
   Comments.findByIdAndRemove(req.query.id)
@@ -189,6 +273,16 @@ router.get("/author/delete", (req, res, next) => {
   Comments.findByIdAndRemove(req.query.id)
     .then(deletedThing => {
       console.log("deleted!!!!!!!!!");
+      res.redirect("back");
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+router.get("/profile/delete", (req, res, next) => {
+  Comments.findByIdAndRemove(req.query.id)
+    .then(deletedThing => {
       res.redirect("back");
     })
     .catch(error => {

@@ -10,6 +10,10 @@ a {
   background: red;
   height: 80px; }
 
+nav > img {
+  width: 4vw;
+  margin: 10px 5px 0 5px; }
+
 .welcome {
   background-image: url("../images/library.jpg");
   background-size: cover;

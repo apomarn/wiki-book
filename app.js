@@ -117,6 +117,9 @@ app.set("view engine", "hbs");
 //       console.log('clean!!!')
 //     }
 // }}));
+hbs.registerHelper("toUpperCase", function(str) {
+  return str.toUpperCase();
+});
 hbs.registerHelper("cleanUp", function(clean) {
   console.log("in clean", clean);
   return clean.replace(" ", "-").toLowerCase();
