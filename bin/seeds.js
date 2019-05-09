@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Book = require("../models/book");
 
 const dbName = "wiki-book";
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(`mongodb+srv://apomarn:11pomar00@cluster0-nr2dd.mongodb.net/test?retryWrites=true${dbName}`);
 
 const books = [
   {

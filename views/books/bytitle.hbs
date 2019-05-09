@@ -1,4 +1,9 @@
 {{#if currentUser}}
+
+<form action="/fave/add/{{book._id}}" method="POST">
+  <button type="submit">FAVORITE</button>
+</form>
+
 <div>
   <img alt="{{book.title}}" src="{{book.image}}">
 </div>
@@ -43,7 +48,7 @@
 
 {{else}}
 <div>
-  <img alt="{{book.title}}" src="{{book.image}}">
+  <img alt="/title?title={{book.title}}" src="{{book.image}}">
 </div>
 <div>
   <h1>{{book.title}}</h1>
@@ -67,7 +72,9 @@
 <h3>Sign in to leave your reviews <a href="/login">here!</a></h3>
 
 {{#each comments}}
-<img src="{{currentUser.avatar}}" alt="">
+<img src="{{user_id.avatar}}" alt="">
+
+{{!-- <img src="{{currentUser.avatar}}" alt=""> --}}
 <h3>username: {{username}}</h3>
 <p>{{text}}</p>
 {{/each}}

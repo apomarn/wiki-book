@@ -20,7 +20,9 @@ const User = require("./models/user");
 
 mongoose.Promise = Promise;
 mongoose
-  .connect("mongodb://localhost/wiki-book", { useNewUrlParser: true })
+  // .connect("mongodb://localhost/wiki-book", { useNewUrlParser: true })
+
+.connect("mongodb+srv://apomarn:11pomar00@cluster0-nr2dd.mongodb.net/test?retryWrites=true", { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })

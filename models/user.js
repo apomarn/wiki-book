@@ -8,7 +8,8 @@ const userSchema = new Schema(
     avatar: {
       type: String,
       default: "/images/avatars.png"
-    }
+    },
+    favoriteBooks: [{ type: Schema.Types.ObjectId, ref: "books" }]
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

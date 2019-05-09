@@ -1,25 +1,104 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0; }
 
-a {
-  color: #00b7ff; }
-
+/***********************************************************************
+                               LAYOUT
+***********************************************************************/
 .nav {
-  background: red;
-  height: 80px; }
+  background: #8E8579;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+
+.nav > a {
+  margin: 20px;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold; }
 
 nav > img {
   width: 4vw;
-  margin: 10px 5px 0 5px; }
+  margin: 2px 20px 0 0; }
 
+/***********************************************************************
+                               INDEX
+***********************************************************************/
 .welcome {
-  background-image: url("../images/library.jpg");
-  background-size: cover;
-  height: 800px;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin: 60px 0; }
+
+.welcome > img {
+  width: 100%;
+  height: auto; }
+
+.welcome > p {
+  margin: 60px 0 50px 0; }
+
+.search {
+  display: flex;
+  justify-content: space-around;
+  background-color: #B6AFA8;
+  margin: 0 100px;
+  border-radius: 20px;
+  padding: 5px; }
+
+.search > div > form {
+  text-align: center; }
+
+.title_author {
+  margin: 10px 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+
+.books {
+  display: flex;
+  justify-content: space-around; }
+
+.bookType {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 33%;
+  align-items: center;
+  text-align: justify; }
+
+@media (max-width: 360px) {
+  .nav > img {
+    width: 12vw; }
+  .nav > a {
+    margin: 10px 14px; }
+  .search {
+    margin: 0 10px;
+    height: 120px;
+    flex-flow: row; }
+  .title_author {
+    margin: 0;
+    display: flex;
+    flex-direction: column; }
+  .title_author > form > input {
+    height: 20px;
+    background-color: white;
+    margin: 0; }
+  .title_author > h3 {
+    margin: 11px; }
+  .books {
+    display: flex;
+    flex-direction: column; }
+  .bookType {
+    margin: 20px 120px; }
+  .bookType > p {
+    width: 200%;
+    font-size: 12px; } }
 
 /*# sourceMappingURL=style.css.map */

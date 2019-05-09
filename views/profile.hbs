@@ -34,3 +34,16 @@
 
   </script>
 </div>
+
+<h3>Your Favorite Books:</h3>
+
+  <div>
+    {{#each user.favoriteBooks}}
+    <img alt="{{title}}" src="{{image}}">
+    <h2><a href="/title?title={{title}}">{{title}}</a></h2>
+    <p>Published {{publication_date}} by {{publisher}}</p>
+    <form action="/fave/delete/{{book._id}}" method="POST">
+      <button type="submit">DELETE</button>
+    </form>
+    {{/each}}
+  </div>

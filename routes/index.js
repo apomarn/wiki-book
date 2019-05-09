@@ -3,8 +3,7 @@ const router = express.Router();
 const Book = require("../models/book");
 const Comments = require("../models/comments");
 const User = require("../models/user");
-const uploadCloud = require('../cloudinary');
-
+const uploadCloud = require("../cloudinary");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -34,8 +33,8 @@ router.get("/profile", isLoggedIn, async (req, res, next) => {
     console.log("try this");
     console.log(req.user);
     const comments = await Comments.find({ username: req.user.username }).populate("user_id");
-    const user = await User.find({ username: req.query.username });
-
+    const user = await User.findById(req.user._id).populate("favoriteBooks");
+    console.log("this is the user info for the profile page ==================== ", user);
     console.log(comments);
     res.render("profile", { user, comments });
   } catch (err) {
@@ -193,22 +192,21 @@ router.post("/commentProfile/edit/:id", async (req, res, next) => {
   res.redirect("/profile");
 });
 
-router.get("/pictureProfile/edit", (req,res, next) => {
-  User.findOne({_id: req.query.id})
-    .then( user => {
-      res.render("editProfilePicture", {user});
+router.get("/pictureProfile/edit", (req, res, next) => {
+  User.findOne({ _id: req.query.id })
+    .then(user => {
+      res.render("editProfilePicture", { user });
     })
     .catch(error => {
       console.log(error);
     });
-})
+});
 
-router.post("/pictureProfile/edit?", uploadCloud.single("photo"),  async (req, res, next) => {
- console.log(req.body)
+router.post("/pictureProfile/edit?", uploadCloud.single("photo"), async (req, res, next) => {
+  console.log(req.body);
   const picture = await User.findByIdAndUpdate(req.query.id, {
     avatar: req.file.url
   });
-  
 
   res.redirect("/profile");
 });
@@ -289,6 +287,50 @@ router.get("/profile/delete", (req, res, next) => {
       console.log(error);
     });
 });
+
+router.get("/title?title=:id", async (req, res, next) => {
+  const book = await Book.findById({ title: req.query.title });
+  const user = await User.findById({ favoriteBook: req.query.favoriteBook });
+
+  res.redirect("back", { book, user });
+});
+
+router.post("/fave/add/:bookId", (req, res, next) => {
+  if (req.user.favoriteBooks.includes(req.params.bookId)) {
+    console.log("book in favorites <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    res.redirect("back");
+  } else {
+    req.user.favoriteBooks.push(req.params.bookId);
+    req.user
+      .save()
+      .then(updatedUser => {
+        console.log("added book to favorite ----------- ", updatedUser);
+        res.redirect("back");
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+});
+
+
+
+
+// router.post("/fave/delete/:bookId", isLoggedIn, (req, res, next) => {
+//   console.log("Deleted a fave");
+//   favoriteBooks.findOneAndDelete({ _id: req.params.id }).then(userFaves => {
+//     req.user.favoriteBooks.pull(req.params.id)
+//     req.user.save()
+//     .then(updatedUser => {
+//       console.log("the new user info ============== ", updatedUser);
+//       res.redirect("back");
+
+//     })
+//     .catch(err => {
+//       next(err)
+//     })
+//   })
+// })
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
