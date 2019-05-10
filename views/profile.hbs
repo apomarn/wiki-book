@@ -8,15 +8,30 @@
   <a href="/pictureProfile/edit?id={{currentUser._id}}">EDIT</a>
 </div>
 
+<div class="yourcomments">
 <h3>Your Comments:</h3>
+</div>
+
+
+
+{{#each comments}}
+<div class="usercomments">
+  <div class="comment">
+
+    <p class="text-comment">{{text}}</p>
+
+<div class="edit-delete">
+  <a href="/commentAuthor/edit?id={{_id}}">Edit</a> 
+  <a href="/author/delete?id={{_id}}">Delete</a>
+</div>
+  </div>
+</div>
+{{/each}}
+
+
+
 
 <div>
-  {{#each comments}}
-  <p>{{text}}</p>
-  <a href="/commentProfile/edit?id={{_id}}">EDIT</a>
-  <a href="/profile/delete?id={{_id}}">DELETE</a>
-  {{/each}}
-
   <script>
 
     function readURL(input) {
@@ -35,7 +50,32 @@
   </script>
 </div>
 
-<h3>Your Favorite Books:</h3>
+<h3 class="yourcomments">Your Favorite Books:</h3>
+
+
+{{#each user.favoriteBooks}}
+<div class="byauthor">
+  <div class="bytitle">
+  <div class="imgbytitle">
+    <img alt="{{title}}" src="{{image}}">
+  </div>
+  <div class="descriptionbytitle">
+    <h1><a href="/title?title={{title}}">{{title}}</a></h1>
+    <p><strong>Published: </strong>{{publication_date}} <br>by {{publisher}}</p>
+    
+  </div>
+  </div>
+  <form class="edit-delete" action="/fave/delete/{{book._id}}" method="POST">
+    <button type="submit">DELETE</button>
+  </form>
+  </div>
+{{/each}}
+
+
+
+
+
+{{!-- 
 
 <div>
   {{#each user.favoriteBooks}}
@@ -46,4 +86,4 @@
     <button type="submit">DELETE</button>
   </form>
   {{/each}}
-</div>
+</div> --}}

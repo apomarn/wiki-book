@@ -1,8 +1,19 @@
-<h1>Edit your comment:</h1>
+<h3 class="yourcomments">Edit your comment:</h3>
 
 {{!-- <form action="/title?title={{theBook.title}}" method="post"> --}}
+<div class="edit" ></div>
 <form action="/comment/edit/{{comment._id}}" method="post">
   <label for="theText"></label>
   <input id="theText" type="text" name="title" value="{{comment.text}}">
-  <button type="submit">EDIT</button>
+  <button class="editonly" type="submit">EDIT</button>
 </form>
+
+
+
+{{!-- <div class="leavecomment">
+  <form action="/addComment" method="POST">
+    <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
+    <input name="bookId" value="{{book._id}}" hidden>
+    <input type="submit">
+  </form>
+</div> --}}
