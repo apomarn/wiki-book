@@ -1,45 +1,62 @@
 {{#if currentUser}}
 
-<form action="/fave/add/{{book._id}}" method="POST">
-  <button type="submit">FAVORITE</button>
+<div class="bytitle">
+  <div class="imgbytitle">
+    <img alt="{{book.title}}" src="{{book.image}}">
+  </div>
+  <div class="descriptionbytitle">
+    <h1>{{book.title}}</h1>
+    <h3>- by {{book.author}}</h3>
+    <p><strong>Published: </strong>{{book.publication_date}} <br>by {{book.publisher}}</p>
+    <p><strong>Total pages: </strong>{{book.pages}}</p>
+  </div>
+</div>
+<div class="description">
+  <h3>Description:</h3>
+  <p>{{book.description}}</p>
+
+</div>
+<div class="genres">
+  <p>Genres:</p>
+  {{#each book.genre}}
+  <ul>
+    <li>
+      <a href="/genre/{{cleanUp this}}">{{this}}</a>
+    </li>
+  </ul>
+  {{/each}}
+</div>
+
+
+<form class="addfavorites" action="/fave/add/{{book._id}}" method="POST">
+  <button type="submit">ADD BOOK TO YOUR FAVORITE LIST</button>
 </form>
 
-<div>
-  <img alt="{{book.title}}" src="{{book.image}}">
+<div class="leavecomment">
+  <h3>Leave a comment about {{book.title}}: </h3>
+  <form action="/addComment" method="POST">
+    <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
+    <input name="bookId" value="{{book._id}}" hidden>
+    <input type="submit">
+  </form>
 </div>
-<div>
-  <h1>{{book.title}}</h1>
-  <h3>- by {{book.author}}</h3>
-  <p>Published {{book.publication_date}} by {{book.publisher}}</p>
-  <p>Total pages: {{book.pages}}</p>
-</div>
 
-<h3>Description:</h3>
-<p>{{book.description}}</p>
-
-
-
-<p>Genres:</p>
-{{#each book.genre}}
-<ul>
-  <li>
-    <a href="/genre/{{cleanUp this}}">{{this}}</a>
-  </li>
-</ul>
-{{/each}}
-
-<h3>Leave a comment about {{book.title}}: </h3>
-<form action="/addComment" method="POST">
-  <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
-  <input name="bookId" value="{{book._id}}" hidden>
-  <input type="submit">
-</form>
 
 {{#each comments}}
-<img src="{{user_id.avatar}}" alt="">
-<h3>username: {{username}}</h3>
-<p>{{text}}</p>
-<a href="/comment/edit?id={{_id}}">Edit</a> <a href="/title/delete?id={{_id}}">Delete</a>
+<div class="usercomments">
+  <div class="userinfo">
+    <h3>{{username}}:</h3>
+    <img src="{{user_id.avatar}}" alt="">
+  </div>
+  <div class="comment">
+
+    <p class="text-comment">{{text}}</p>
+
+<div class="edit-delete">
+  <a href="/comment/edit?id={{_id}}">Edit</a> <a href="/title/delete?id={{_id}}">Delete</a>
+</div>
+  </div>
+</div>
 {{/each}}
 
 
@@ -47,36 +64,52 @@
 
 
 {{else}}
-<div>
-  <img alt="/title?title={{book.title}}" src="{{book.image}}">
+<div class="bytitle">
+  <div class="imgbytitle">
+    <img alt="{{book.title}}" src="{{book.image}}">
+  </div>
+  <div class="descriptionbytitle">
+    <h1>{{book.title}}</h1>
+    <h3>- by {{book.author}}</h3>
+    <p><strong>Published: </strong>{{book.publication_date}} <br>by {{book.publisher}}</p>
+    <p><strong>Total pages: </strong>{{book.pages}}</p>
+  </div>
 </div>
-<div>
-  <h1>{{book.title}}</h1>
-  <h3>- by {{book.author}}</h3>
-  <p>Published {{book.publication_date}} by {{book.publisher}}</p>
-  <p>Total pages: {{book.pages}}</p>
+<div class="description">
+  <h3>Description:</h3>
+  <p>{{book.description}}</p>
+
+</div>
+<div class="genres">
+  <p>Genres:</p>
+  {{#each book.genre}}
+  <ul>
+    <li>
+      <a href="/genre/{{cleanUp this}}">{{this}}</a>
+    </li>
+  </ul>
+  {{/each}}
+</div>
+<div class="notlogin">
+<h3>Sign in to leave reviews and to add this book to your favorite list <a href="/login">here!</a></h3>
 </div>
 
-<h3>Description:</h3>
-<p>{{book.description}}</p>
-
-<p>Genres:</p>
-{{#each book.genre}}
-<ul>
-  <li>
-    <a href="/genre/{{cleanUp this}}">{{this}}</a>
-  </li>
-</ul>
-{{/each}}
-
-<h3>Sign in to leave your reviews <a href="/login">here!</a></h3>
 
 {{#each comments}}
-<img src="{{user_id.avatar}}" alt="">
+<div class="usercomments">
+  <div class="userinfo">
+    <h3>{{username}}:</h3>
+    <img src="{{user_id.avatar}}" alt="">
+  </div>
+  <div class="comment">
 
-{{!-- <img src="{{currentUser.avatar}}" alt=""> --}}
-<h3>username: {{username}}</h3>
-<p>{{text}}</p>
+    <p class="text-comment">{{text}}</p>
+
+<div class="edit-delete">
+  <a href="/comment/edit?id={{_id}}">Edit</a> <a href="/title/delete?id={{_id}}">Delete</a>
+</div>
+  </div>
+</div>
 {{/each}}
 
 

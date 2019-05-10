@@ -1,53 +1,90 @@
 {{#if currentUser}}
-<h1>Books by {{toUpperCase author}}:</h1>
+<h2>Books by {{toUpperCase author }}:</h2>
+
 {{#each book}}
-<div>
-  <img alt="{{title}}" src="{{image}}">
-  <div>
-
-    <h2><a href="/title?title={{title}}">{{title}}</a></h2>
-    <p>Published {{publication_date}} by {{publisher}}</p>
-    {{/each}}
-
-
-   
-    <h3>Leave a comment about the {{author}}: </h3>
-    <form action="/addCommentAuthor" method="POST">
-      <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
-      <input name="author" value="{{author}}" hidden>
-      <input type="submit">
-    </form>
+<div class="byauthor">
+  <div class="bytitle">
+  <div class="imgbytitle">
+    <img alt="{{title}}" src="{{image}}">
+  </div>
+  <div class="descriptionbytitle">
+    <h1><a href="/title?title={{title}}">{{title}}</a></h1>
+    <p><strong>Published: </strong>{{publication_date}} <br>by {{publisher}}</p>
     
+  </div>
+  </div>
+  </div>
+{{/each}}
+
+<div class="leavecomment">
+  <h3>Leave a comment about {{author}}: </h3>
+  <form action="/addCommentAuthor" method="POST">
+    <textarea rows="5" cols="100" name="comment" placeholder="Enter comment here"></textarea>
+    <input name="author" value="{{author}}" hidden>
+    <input type="submit">
+  </form>
+</div>
+
+
+
+{{#each comments}}
+<div class="usercomments">
+  <div class="userinfo">
+    <h3>{{username}}:</h3>
+    <img src="{{user_id.avatar}}" alt="">
+  </div>
+  <div class="comment">
+
+    <p class="text-comment">{{text}}</p>
+
+<div class="edit-delete">
+  <a href="/commentAuthor/edit?id={{_id}}">Edit</a> <a href="/author/delete?id={{_id}}">Delete</a>
+</div>
+  </div>
+</div>
+{{/each}}
+
+
+
+
+{{else}}
+
+<h2>Books by {{toUpperCase author}}:</h2>
+  {{#each book}}
+<div class="byauthor">
+  <div class="bytitle">
+  <div class="imgbytitle">
+    <img alt="{{title}}" src="{{image}}">
+  </div>
+  <div class="descriptionbytitle">
+    <h1><a href="/title?title={{title}}">{{title}}</a></h1>
+    <p><strong>Published: </strong>{{publication_date}} <br>by {{publisher}}</p>
     
-
-    {{#each comments}}
-    <img src="{{user_id.avatar}}" alt="" >
-    <h3>username: {{username}}</h3>
-    <p>{{text}}</p>
-    <a href="/commentAuthor/edit?id={{_id}}">Edit</a> <a href="/author/delete?id={{_id}}">Delete</a>
-    {{/each}}
+  </div>
+  </div>
+  </div>
+{{/each}}
 
 
+<h3 class="notlogin">Sign in to leave your reviews <a href="/login">here!</a></h3>
 
 
+{{#each comments}}
+<div class="usercomments">
+  <div class="userinfo">
+    <h3>{{username}}:</h3>
+    <img src="{{user_id.avatar}}" alt="">
+  </div>
+  <div class="comment">
 
-    {{else}}
-      <h1>Books by {{toUpperCase author}}:</h1>
-      {{#each book}}
-        <div>
-           <img alt="{{title}}" src="{{image}}">
-        <div>
+    <p class="text-comment">{{text}}</p>
 
-        <h2><a href="/title?title={{title}}">{{title}}</a></h2>
-        <p>Published {{publication_date}} by {{publisher}}</p>
-      {{/each}}
+<div class="edit-delete">
+  <a href="/commentAuthor/edit?id={{_id}}">Edit</a> <a href="/author/delete?id={{_id}}">Delete</a>
+</div>
+  </div>
+</div>
+{{/each}}
 
 
-      <h3>Sign in to leave your reviews <a href="/login">here!</a></h3>
-
-      {{#each comments}}
-      <img src="{{currentUser.avatar}}" alt="" >
-      <h3>username: {{username}}</h3>
-      <p>{{text}}</p>
-    {{/each}}
-    {{/if}}
+{{/if}}

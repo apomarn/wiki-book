@@ -1,3 +1,15 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Spirax");
+.text-comment {
+  font-size: 24px;
+  font-family: "Spirax", cursive; }
+
+.text-comment::before {
+  content: "“"; }
+
+.text-comment::after {
+  content: "”"; }
+
 body {
   font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
@@ -7,7 +19,7 @@ body {
                                LAYOUT
 ***********************************************************************/
 .nav {
-  background: #8E8579;
+  background: #8e8579;
   height: 80px;
   display: flex;
   justify-content: flex-end;
@@ -47,7 +59,7 @@ nav > img {
 .search {
   display: flex;
   justify-content: space-around;
-  background-color: #B6AFA8;
+  background-color: #b6afa8;
   margin: 0 100px;
   border-radius: 20px;
   padding: 5px; }
@@ -56,9 +68,9 @@ nav > img {
   text-align: center; }
 
 .title_author {
-  margin: 10px 40px;
+  margin: 10px 10px;
   display: flex;
-  flex-flow: column;
+  flex-flow: column-reverse;
   align-items: center; }
 
 .books {
@@ -73,21 +85,24 @@ nav > img {
   align-items: center;
   text-align: justify; }
 
-@media (max-width: 360px) {
+@media (min-width: 300px) {
   .nav > img {
     width: 12vw; }
   .nav > a {
-    margin: 10px 14px; }
+    margin: 5px;
+    font-size: 16px; }
   .search {
     margin: 0 10px;
     height: 120px;
     flex-flow: row; }
   .title_author {
-    margin: 0;
+    margin: 10px 5px;
     display: flex;
     flex-direction: column; }
+  .text {
+    height: 15px;
+    border-radius: 20px; }
   .title_author > form > input {
-    height: 20px;
     background-color: white;
     margin: 0; }
   .title_author > h3 {
@@ -96,9 +111,148 @@ nav > img {
     display: flex;
     flex-direction: column; }
   .bookType {
-    margin: 20px 120px; }
+    width: 100%;
+    margin: 0 0 30px 0; }
+  .bookType > a > img {
+    width: 225px;
+    height: auto; }
   .bookType > p {
-    width: 200%;
-    font-size: 12px; } }
+    width: 80%;
+    font-size: 16px; }
+  .bytitle {
+    display: flex;
+    margin: 15px; }
+  .imgbytitle > img {
+    width: 70px;
+    height: auto;
+    box-shadow: 0 2px 2px; }
+  .descriptionbytitle {
+    margin: 5px 10px; }
+  .descriptionbytitle > h1 {
+    font-size: 16px;
+    margin: 0;
+    padding: 0; }
+  .descriptionbytitle > h3 {
+    font-size: 14px;
+    margin: 0 0 20px 0; }
+  .descriptionbytitle > p {
+    font-size: 12px;
+    margin: 0; }
+  .description {
+    margin: 10px; }
+  .desription > h3 {
+    font-size: 14px; }
+  .description > p {
+    font-size: 12px;
+    text-align: justify;
+    margin: 0 10px; }
+  .genres {
+    margin: 0 10px; }
+  .genres > p {
+    font-weight: bold; }
+  .genres > ul > li > a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px; }
+  .leavecomment {
+    margin: 0 10px; }
+  .leavecomment > h3 {
+    font-size: 12px; }
+  .leavecomment > form > input {
+    border: solid 1px black;
+    border-radius: 10px;
+    justify-content: center; }
+  .leavecomment > form > textarea {
+    border: dashed 1px black;
+    width: 98%;
+    height: auto; }
+  .usercomments {
+    display: flex;
+    margin: 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+    border-radius: 10px; }
+  .userinfo {
+    margin: 10px 15px; }
+  .userinfo > h3 {
+    font-size: 14px;
+    margin: 0 0 3px 3px; }
+  .userinfo > img {
+    box-shadow: 0 2px 2px;
+    width: 70px;
+    height: auto; }
+  .usercomments > p {
+    font-size: 12px;
+    margin: 10px 20px; }
+  .comment {
+    width: 100%; }
+  .comment > img {
+    margin: 10px 0;
+    padding: 0;
+    width: 6vw; }
+  .comment > p {
+    font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 14px; }
+  .edit-delete {
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0; }
+  .edit-delete > a {
+    margin: 0;
+    border: 1px solid black;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #8e8579;
+    color: black;
+    text-decoration: none; }
+  .addfavorites {
+    display: flex;
+    justify-content: center;
+    border: 1px dashed black;
+    border-radius: 10px;
+    margin: 0 40px;
+    padding: 5px;
+    background-color: #8e8579; }
+  .notlogin {
+    font-size: 14px;
+    margin: 5px 20px; }
+  .notlogin > h3 > a {
+    text-decoration: none;
+    color: #8e8579; }
+  .byauthor {
+    border: 1px solid black;
+    box-shadow: 0 3px 3px;
+    margin: 10px; }
+  .allgenres {
+    display: flex;
+    flex-flow: row wrap; }
+  .type {
+    font-size: 16px;
+    display: flex;
+    justify-content: center; }
+  .fictiongenres {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    flex-wrap: wrap-reverse;
+    width: 38vw;
+    justify-content: flex-start;
+    align-items: center; }
+  .fictiongenres > a > img {
+    width: 100px;
+    height: auto; }
+  .fictiongenres > p {
+    font-size: 12px;
+    text-align: justify; }
+  .perfil {
+    display: flex;
+    flex-direction: column;
+    text-align: center; }
+  .perfilphoto {
+    display: flex;
+    align-items: flex-start; }
+  .perfilphoto > img {
+    width: 300px; } }
 
 /*# sourceMappingURL=style.css.map */

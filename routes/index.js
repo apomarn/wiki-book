@@ -313,24 +313,21 @@ router.post("/fave/add/:bookId", (req, res, next) => {
   }
 });
 
-
-
-
-// router.post("/fave/delete/:bookId", isLoggedIn, (req, res, next) => {
-//   console.log("Deleted a fave");
-//   favoriteBooks.findOneAndDelete({ _id: req.params.id }).then(userFaves => {
-//     req.user.favoriteBooks.pull(req.params.id)
-//     req.user.save()
-//     .then(updatedUser => {
-//       console.log("the new user info ============== ", updatedUser);
-//       res.redirect("back");
-
-//     })
-//     .catch(err => {
-//       next(err)
-//     })
-//   })
-// })
+router.post("/fave/delete/:bookId", isLoggedIn, (req, res, next) => {
+  console.log("Deleted a fave");
+  favoriteBooks.findOneAndDelete({ _id: req.params.id }).then(userFaves => {
+    req.user.favoriteBooks.pull(req.params.id);
+    req.user
+      .save()
+      .then(updatedUser => {
+        console.log("the new user info ============== ", updatedUser);
+        res.redirect("back");
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
+});
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
