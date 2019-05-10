@@ -87,7 +87,8 @@ nav > img {
 
 @media (min-width: 300px) {
   .nav > img {
-    width: 12vw; }
+    width: auto;
+    height: 48px; }
   .nav > a {
     margin: 5px;
     font-size: 16px; }
@@ -226,7 +227,8 @@ nav > img {
     margin: 10px; }
   .allgenres {
     display: flex;
-    flex-flow: row wrap; }
+    flex-flow: row wrap;
+    justify-content: space-around; }
   .type {
     font-size: 16px;
     display: flex;

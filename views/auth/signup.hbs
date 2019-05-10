@@ -1,14 +1,40 @@
+<head>
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group input {
+      border: 1px solid black;
+      height: 40px;
+    }
+  </style>
+</head>
+
+
 <h2>Signup</h2>
 
 <form action="/signup" method="POST" id="form-container">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" placeholder="JonSnow">
+  </div>
+
   <br><br>
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" placeholder="Your password">
+  </div>
 
   {{#if message}}
-    <div class="error-message">{{ message }}</div>
+  <div class="error-message">{{ message }}</div>
   {{/if}}
   <br><br>
 

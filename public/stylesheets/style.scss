@@ -99,7 +99,8 @@ nav > img {
 @media (min-width: 300px) {
   //bigger
   .nav > img {
-    width: 12vw;
+    width: auto;
+    height: 48px;
   }
 
   .nav > a {
@@ -306,6 +307,7 @@ nav > img {
   .allgenres {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
   }
 
   .type {
